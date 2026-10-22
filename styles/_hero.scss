@@ -163,6 +163,9 @@
             }
         }
     }
+    @media (max-width: v.$media_min) {
+        height: 680px;
+    }
 
     &__scroll{
 
