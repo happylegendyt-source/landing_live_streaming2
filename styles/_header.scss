@@ -3,10 +3,11 @@
 @use 'placeholders';
 @use 'sass:color';
 
-.header{
+.header {
     width: 100%;
     height: 50px;
     background-color: color.adjust(v.$color_white, $alpha: -0.85);
+
     border: {
         bottom: {
             width: 1px;
@@ -14,6 +15,7 @@
             color: v.$color_white;
         }
     }
+
     .nav {
         height: 50px;
         // display: flex;
@@ -26,7 +28,8 @@
             width: 255px;
             border-right: 1px solid v.$color_white;
             @include m.d-flex(center, center);
-            &-link{
+
+            &-link {
                 font-size: 25px;
                 font-weight: 500;
                 color: v.$color_white;
@@ -34,18 +37,19 @@
                 span {
                     font-weight: 700;
                 }
+
                 @extend %hover-black;
             }
         }
 
-        &__links{
+        &__links {
             flex-grow: 1;
 
-            .list{
+            .list {
 
                 padding: 0 0 0 min(100px, 5vw);
                 @include m.d-flex(start, center, nowrap, row, min(100px, 5vw), 0);
-                
+
                 &__item {
                     &-link {
                         font-size: 22px;
@@ -55,8 +59,9 @@
                     }
                 }
             }
-            @media (max-width: v.$media_lg){
-                .list{
+
+            @media (max-width: v.$media_lg) {
+                .list {
                     padding: 0 5px 0 5px;
                     @include m.d-flex(center, center, nowrap, row, min(100px, 5vw), 0);
 
@@ -68,6 +73,7 @@
             height: 100%;
             @include m.d-flex (center, center);
             padding: 0 30px;
+
             border: {
                 left: 1px solid v.$color_white;
                 right: 1px solid v.$color_white;
@@ -85,7 +91,7 @@
             width: 90px;
             @include m.d-flex(center, center);
 
-            &__link{
+            &__link {
                 &-icon {
                     width: 27px;
                     height: 28px;
@@ -93,5 +99,71 @@
                 }
             }
         }
+
+        @media (max-width: v.$media_md) {
+
+            &__links,
+            .covid,
+            .globe {
+                display: none;
+            }
+        }
+    }
+}
+
+.mobile-navigation {
+    display: none;
+
+    &__burger {
+        @include m.position(absolute, 10, -1, top, right, 13px, 20px);
+
+        &-icon {
+            width: 33px;
+            height: 22px;
+            stroke: v.$color_white;
+            @extend %hover-black-icon;
+    
+        }
+    }
+
+    &__toggler {
+        display: none;
+
+        &:checked + .nav {
+            translate: 0;
+        }
+    }
+    .nav{
+        padding: 100px 70px 0;
+        @include m.position(fixed, 999, 0);
+        background-color: color.adjust(v.$color_black, $alpha: -0.5);
+        backdrop-filter: blur(10px);
+        translate: 100% 0;
+        transition: translate .22s;
+
+        &__list {
+            @include m.d-flex(start, start, nowrap, column, 0, 20px);
+            &-item{
+                &-link{
+                    @include m.font(36px, 400, v.$color-white);
+                    text-shadow: 2px 2px 5px rgba(0,0,0, .3);
+                }
+            }
+        }
+        &__cross{
+            @include m.position(absolute, 10, -1, top, right, 18px, 23px);
+            &-icon{
+                width: 25px;
+                height: 22px;
+                stroke: v.$color_white;
+                @extend %hover-black-icon;
+            }
+        }
+
+    }
+
+    
+    @media (max-width: v.$media_md) {
+        display: block;
     }
 }
